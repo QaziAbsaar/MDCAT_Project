@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend/mdcat-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - mdcat-network
+    volumes:
+      - frontend-node-modules:/app/node_modules
+
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - chromadb
+    networks:
+      - mdcat-network
+    volumes:
+      - ./backend:/app
+      - backend-venv:/app/.venv
+
+  # ChromaDB service
+  chromadb:
+    image: ghcr.io/chroma-core/chroma:latest
+    volumes:
+      - chroma-data:/chroma/chroma
+    environment:
+      - ALLOW_RESET=true
+      - CHROMA_SERVER_AUTH_PROVIDER=chromadb.auth.token.TokenAuthServerProvider
+      - CHROMA_SERVER_AUTH_CREDENTIALS_FILE=/chroma/chroma_creds.json
+      - CHROMA_SERVER_AUTH_CREDENTIALS=admin:admin
+    ports:
+      - "8001:8000"
+    networks:
+      - mdcat-network
+
+networks:
+  mdcat-network:
+    driver: bridge
+
+volumes:
+  frontend-node-modules:
+  backend-venv:
+  chroma-data:

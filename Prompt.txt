@@ -1,0 +1,117 @@
+## **Trae: Comprehensive Project Overview - MDCAT Prep Web App**
+
+**Project Name:** MDCAT Prep Web App
+
+**Ultimate Goal:** To build an AI-powered, high-performance web platform that empowers students to excel in the MDCAT exam. This involves providing personalized learning paths, dynamic quizzes, comprehensive mock tests, robust performance analytics, and a community-contributed knowledge base, all powered by verified academic content. The application emphasizes **accuracy, personalization, and efficiency**.
+
+---
+
+### **1. Core Functionality & User Experience**
+
+* **Verified Content Source:**
+    * **Purpose:** Ensure academic integrity and reliability.
+    * **Mechanism:** Integrate multiple academic books (UVEX, etc.) and professor notes. This content will be **read-only for students**; only designated admins (myself) can add or remove.
+* **AI-Powered Question Generation:**
+    * **Purpose:** Provide dynamic, relevant, and high-quality practice.
+    * **Mechanism:** Dynamically generate MCQs for quizzes and mock tests directly from the verified content. **Crucially, every generated question must link back to its exact source material (book, chapter, page).** No random questions.
+* **Student Notes & Bookmarking:**
+    * **Purpose:** Facilitate active learning and personalized revision.
+    * **Mechanism:** Allow students to create and save notes per topic, and bookmark specific questions or explanations for easy future access.
+* **Timed Learning Plans:**
+    * **Purpose:** Structure student preparation and track progress.
+    * **Mechanism:** Offer customizable study plans (e.g., 30-day, 60-day) that generate daily schedules of quizzes, mock tests, and review sessions.
+* **Performance Tracking & Reporting:**
+    * **Purpose:** Provide actionable insights into student performance.
+    * **Mechanism:** Generate detailed weekly and monthly reports, including accuracy per subject/topic, identification of strong/weak areas, time spent, and improvement curves.
+* **AI Personality (Teacher/Mentor):**
+    * **Purpose:** Provide academic guidance and targeted feedback.
+    * **Mechanism:** The AI will maintain a formal, academic tone, explaining why answers are correct/incorrect and intelligently suggesting follow-up topics for identified weak areas.
+* **Flexible Mock Test Scope:**
+    * **Purpose:** Cater to varied study needs (broad vs. focused practice).
+    * **Mechanism:** Students can select mock tests for the full syllabus, a specific subject/course, or even particular chapters/topics within a subject.
+* **Initial Diagnostic Mock Test:**
+    * **Purpose:** Establish a baseline and hyper-personalize the learning journey from day one.
+    * **Mechanism:** New users take a full-length, timed MDCAT mock test. The system then performs an in-depth evaluation, providing a comprehensive diagnostic report highlighting specific strengths and weaknesses across all topics, leading to a tailored initial learning path.
+* **User-Contributed Notes with Quality Control:**
+    * **Purpose:** Foster a collaborative learning environment and enrich the content database with peer-reviewed resources.
+    * **Mechanism:** Students can submit their own notes. These notes undergo an automated plagiarism/content review and then a manual admin/curator review. Only notes that pass a defined quality threshold are approved, tokenized, embedded into the vector database, and become searchable resources for other students (with attribution).
+
+---
+
+### **2. Technical Architecture & Stack Deep Dive**
+
+This project will follow a **microservice-oriented approach** within a monorepo structure to ensure scalability, maintainability, and clear separation of concerns.
+
+#### **2.1. Frontend: React.js (with Vite)**
+
+* **Framework:** React.js for building a dynamic, single-page application (SPA).
+* **Build Tool:** Vite for lightning-fast development server and optimized production builds.
+* **State Management:**
+    * **React Context API:** For global state like user authentication status, theming, and shared configurations that don't require complex interactions.
+    * **`useState`/`useReducer` hooks:** For local component state and simple state logic.
+    * **(Future Consideration for Complexity):** Redux Toolkit or Zustand if state logic grows exceptionally complex across many components.
+* **Routing:** React Router DOM for declarative navigation.
+* **Styling:**
+    * **CSS Modules:** For component-scoped CSS to prevent style conflicts and ensure modularity.
+    * **Tailwind CSS (Utility-First CSS):** For rapid prototyping and consistent design system implementation.
+* **API Communication:** `axios` or native `fetch` API for making HTTP requests to the FastAPI backend.
+* **Form Management:** `react-hook-form` for efficient form validation and handling.
+* **Data Visualization:** A charting library like **Chart.js** or **Recharts** for rendering performance graphs.
+* **Best Practices:** Emphasize small, reusable components, separation of concerns (UI vs. logic), effective use of hooks, lazy loading for performance optimization, and comprehensive testing.
+
+#### **2.2. Backend: FastAPI (Python)**
+
+* **Web Framework:** FastAPI for building robust, high-performance, and asynchronous APIs.
+    * **Key Features Utilized:** Pydantic for data validation and serialization, automatic OpenAPI (Swagger UI/ReDoc) documentation, dependency injection for clean code.
+* **Database:**
+    * **Primary Database (User Data, Metadata):** Initially **SQLite** for simplicity in development, with a clear migration path to **PostgreSQL** for production scalability. This will store user profiles, progress data, notes metadata, etc.
+    * **Vector Database (Content/Knowledge Base):** **ChromaDB** for storing vector embeddings of verified academic content and approved user-contributed notes.
+        * **Persistence:** Configure ChromaDB for persistent storage to ensure data survives restarts.
+* **Authentication & Authorization:**
+    * **JWT (JSON Web Tokens):** For secure, stateless authentication (access tokens).
+    * **`python-jose` and `passlib` (for password hashing with `bcrypt`):** For JWT encoding/decoding and secure password management.
+    * **OAuth2 with Password Flow:** For initial user login.
+* **AI Orchestration:**
+    * **LangChain:** As the primary framework for building and managing the RAG (Retrieval-Augmented Generation) pipeline. This will handle:
+        * **Document Loading & Parsing:** Ingesting various formats (PDF, text).
+        * **Text Splitting:** Chunking documents for embedding.
+        * **Embedding Generation:** Using models like `sentence-transformers` (e.g., `BGE-small-en-v1.5` or `all-MiniLM-L6-v2`) to convert text into vector embeddings.
+        * **Retrieval:** Querying ChromaDB to fetch semantically relevant chunks based on a student's context or a topic.
+        * **Chains:** Orchestrating the flow from retrieval to LLM interaction for question generation, explanation, and recommendations.
+* **Large Language Models (LLMs):**
+    * **Groq API (with Mixtral 8x7B):** Preferred for its exceptional inference speed, making dynamic question generation and AI feedback feel instantaneous.
+    * **(Fallback/Alternative):** OpenAI's GPT-4 (or similar) for more complex reasoning tasks if Groq's models aren't sufficient for specific niche academic topics.
+* **Background Tasks:**
+    * `celery` or FastAPI's built-in background tasks: For computationally intensive operations like embedding large content files after admin upload or processing user-contributed notes.
+* **File Handling:** `python-multipart` for handling file uploads.
+* **OCR (for User Notes/Future Features):** `pytesseract` or integration with a cloud OCR service (e.g., Google Cloud Vision API) for converting image-based notes/questions to text.
+* **Logging:** Python's standard `logging` module for robust application logging.
+* **Configuration:** `python-dotenv` for managing environment variables securely.
+
+---
+
+### **3. DevOps & Deployment**
+
+* **Containerization:** **Docker** for both frontend and backend services to ensure consistent, isolated environments across development, testing, and production. Use multi-stage builds for optimized image sizes.
+* **Orchestration (Local Dev):** **Docker Compose** for easily spinning up the entire application stack (frontend, backend, ChromaDB) during local development.
+* **CI/CD:** **GitHub Actions** for automated:
+    * Code linting and formatting checks.
+    * Unit and integration testing.
+    * Docker image building and tagging.
+    * Deployment to a cloud platform (e.g., a DigitalOcean Droplet, AWS EC2, or a managed service like Render/Vercel for frontend).
+* **Version Control:** Git & GitHub for collaborative development.
+
+---
+
+### **4. Development Approach (for Trae)**
+
+* **Modular Design:** Emphasize breaking down features into small, testable, and maintainable modules/components.
+* **Test-Driven Development (TDD) / Test-Friendly Design:** Prioritize writing tests (unit, integration, end-to-end) for critical functionalities.
+* **API-First Development:** Define API contracts clearly using Pydantic before frontend implementation.
+* **Security First:** Implement secure authentication, input validation, and best practices from the start.
+
+---
+
+**Trae, with this detailed understanding of the project's features, desired technologies, and architectural approach, you are now equipped to assist comprehensively. I will provide you with specific, actionable prompts for each phase and sub-task, starting with 'Phase 1: Project Setup & Core Architecture'. Your continuous role will be to generate code, suggest improvements, identify issues, and help with testing, always keeping this grand vision in mind.**
+
+---

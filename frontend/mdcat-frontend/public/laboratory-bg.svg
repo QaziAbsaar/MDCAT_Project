@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#795548;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3e2723;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="pattern1" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grad1)" />
+  <rect width="100%" height="100%" fill="url(#pattern1)" />
+  
+  <!-- Laboratory symbols -->
+  <g fill="rgba(255,255,255,0.2)">
+    <!-- Lab table -->
+    <rect x="100" y="200" width="600" height="20" fill="rgba(255,255,255,0.3)" />
+    <rect x="120" y="220" width="560" height="10" fill="rgba(255,255,255,0.2)" />
+    
+    <!-- Microscope -->
+    <rect x="150" y="150" width="40" height="10" fill="rgba(255,255,255,0.4)" />
+    <rect x="165" y="100" width="10" height="50" fill="rgba(255,255,255,0.4)" />
+    <circle cx="170" cy="90" r="10" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="rgba(255,255,255,0.2)" />
+    <path d="M150,160 L140,200 L180,200 L170,160" fill="rgba(255,255,255,0.3)" />
+    
+    <!-- Test tubes in rack -->
+    <rect x="250" y="170" width="100" height="30" fill="rgba(255,255,255,0.3)" />
+    <rect x="260" y="120" width="10" height="80" rx="5" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    <rect x="280" y="130" width="10" height="70" rx="5" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    <rect x="300" y="110" width="10" height="90" rx="5" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    <rect x="320" y="140" width="10" height="60" rx="5" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    
+    <!-- Beakers -->
+    <path d="M400,140 L380,200 L420,200 Z" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    <path d="M450,160 L440,200 L460,200 Z" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    <path d="M500,130 L480,200 L520,200 Z" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="rgba(255,255,255,0.1)" />
+    <line x1="400" y1="180" x2="400" y2="180" stroke="rgba(255,255,255,0.4)" stroke-width="20" />
+    <line x1="450" y1="190" x2="450" y2="190" stroke="rgba(255,255,255,0.4)" stroke-width="10" />
+    <line x1="500" y1="170" x2="500" y2="170" stroke="rgba(255,255,255,0.4)" stroke-width="15" />
+    
+    <!-- Bunsen burner -->
+    <rect x="600" y="170" width="20" height="30" fill="rgba(255,255,255,0.3)" />
+    <rect x="595" y="160" width="30" height="10" fill="rgba(255,255,255,0.3)" />
+    <path d="M605,160 L605,140 C605,130 615,130 615,140 L615,160" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+    <path d="M600,140 C610,120 620,120 630,140" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+    <path d="M605,130 C610,120 615,120 620,130" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+    <path d="M610,120 C612,115 613,115 615,120" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="rgba(255,255,255,0.7)">LABORATORY</text>
+</svg>

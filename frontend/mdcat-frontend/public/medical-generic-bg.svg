@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00bcd4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#006064;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="pattern1" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M0,0 L50,50 M50,0 L0,50" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grad1)" />
+  <rect width="100%" height="100%" fill="url(#pattern1)" />
+  
+  <!-- Medical symbols -->
+  <g fill="rgba(255,255,255,0.2)">
+    <!-- Caduceus (medical symbol) -->
+    <line x1="400" y1="80" x2="400" y2="280" stroke="rgba(255,255,255,0.4)" stroke-width="4" />
+    <path d="M370,100 C350,120 350,140 370,160 C390,180 390,200 370,220 C350,240 350,260 370,280" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="none" />
+    <path d="M430,100 C450,120 450,140 430,160 C410,180 410,200 430,220 C450,240 450,260 430,280" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="none" />
+    <circle cx="400" cy="100" r="20" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="rgba(255,255,255,0.1)" />
+    
+    <!-- Stethoscope -->
+    <circle cx="200" cy="150" r="20" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="rgba(255,255,255,0.1)" />
+    <path d="M200,170 C200,190 180,200 180,220 L150,220" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+    <path d="M200,170 C200,190 220,200 220,220 L250,220" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+    
+    <!-- Medical cross -->
+    <rect x="600" y="130" width="60" height="140" rx="5" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="rgba(255,255,255,0.1)" />
+    <rect x="560" y="170" width="140" height="60" rx="5" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="rgba(255,255,255,0.1)" />
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="rgba(255,255,255,0.7)">MEDICAL STUDIES</text>
+</svg>

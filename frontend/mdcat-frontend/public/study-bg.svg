@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4caf50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2e7d32;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="pattern1" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M0,30 L60,30 M30,0 L30,60" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grad1)" />
+  <rect width="100%" height="100%" fill="url(#pattern1)" />
+  
+  <!-- Study symbols -->
+  <g fill="rgba(255,255,255,0.2)">
+    <!-- Book stack -->
+    <rect x="300" y="250" width="200" height="30" rx="5" />
+    <rect x="310" y="220" width="200" height="30" rx="5" />
+    <rect x="290" y="280" width="200" height="30" rx="5" />
+    <rect x="305" y="310" width="200" height="30" rx="5" />
+    
+    <!-- Graduation cap -->
+    <path d="M700,200 L800,250 L700,300 L600,250 Z" />
+    <path d="M700,300 L700,350" stroke="rgba(255,255,255,0.3)" stroke-width="5" fill="none" />
+    <path d="M650,275 L650,325 C650,340 675,350 700,350 C725,350 750,340 750,325 L750,275" stroke="rgba(255,255,255,0.3)" stroke-width="3" fill="none" />
+    <circle cx="700" cy="200" r="10" />
+    
+    <!-- Pencil -->
+    <path d="M400,400 L450,450 L440,460 L390,410 Z" />
+    <path d="M390,410 L380,440 L410,430 Z" />
+    <path d="M450,450 L470,430 L460,420 L440,440 Z" />
+    
+    <!-- Atom symbol -->
+    <circle cx="800" cy="400" r="10" fill="rgba(255,255,255,0.5)" />
+    <ellipse cx="800" cy="400" rx="60" ry="20" stroke="rgba(255,255,255,0.3)" stroke-width="3" fill="none" />
+    <ellipse cx="800" cy="400" rx="60" ry="20" stroke="rgba(255,255,255,0.3)" stroke-width="3" fill="none" transform="rotate(60 800 400)" />
+    <ellipse cx="800" cy="400" rx="60" ry="20" stroke="rgba(255,255,255,0.3)" stroke-width="3" fill="none" transform="rotate(120 800 400)" />
+  </g>
+  
+  <!-- Text -->
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="rgba(255,255,255,0.7)">EFFECTIVE STUDY</text>
+</svg>
